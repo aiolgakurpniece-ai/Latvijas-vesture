@@ -1,0 +1,215 @@
+<!doctype html><html lang="lv"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Latvijas vēstures ekspedīcija</title><style>
+:root{--navy:#122b47;--blue:#175f91;--red:#ac2739;--bg:#f0f6fc;--gold:#f9c84a}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--navy);font:16px/1.55 system-ui,-apple-system,Segoe UI,sans-serif}header{background:linear-gradient(125deg,#12385d,#226c9c);color:white;padding:23px 18px;text-align:center}h1{margin:0;font-size:clamp(25px,5vw,42px)}header p{margin:6px 0}main{max-width:1050px;margin:auto;padding:16px}nav{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 20px}button{cursor:pointer;border:0;border-radius:13px;padding:12px 16px;font-weight:750;font-size:15px}nav button{background:white;color:#16476a;border:2px solid #d2e2ef}nav button.active,.primary{background:#175f91;color:white}section{display:none}section.active{display:block}.panel{background:white;border-radius:18px;padding:20px;margin:14px 0;box-shadow:0 5px 22px #1b4b7020}.lead{font-size:18px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.small{font-size:13px;color:#48627b}.pill{display:inline-block;background:#e9f3ff;border-radius:20px;padding:5px 10px;font-size:13px;font-weight:bold}.year{color:#9d1e33;font-weight:850;font-size:22px}.scene{font-size:70px;text-align:center;padding:15px;background:#f1f8ff;border-radius:18px}.timeline{display:flex;gap:9px;overflow-x:auto;padding:14px 3px}.tick{flex:0 0 112px;background:#e6f1fa;border:2px solid transparent;color:#183a59;min-height:85px}.tick.selected{border-color:#b62539;background:#fff2ef}.tick span{display:block;font-size:23px}.mapbox{position:relative;border-radius:16px;overflow:hidden;background:#dcebf4}.mapbox svg{width:100%;display:block}.maplabel{font-weight:800;font-size:18px}.status{border-left:6px solid #1b7296;padding:13px;background:#edf7ff;border-radius:8px}input[type=range]{width:100%;accent-color:#ad2638}.choice{display:block;text-align:left;width:100%;margin:9px 0;background:#eef4fa;color:#143453;border:2px solid #d8e5f1}.choice.correct{background:#d8f6e4;border-color:#29905b}.choice.wrong{background:#ffe3e3;border-color:#b83d4c}.sortcard{display:flex;align-items:center;gap:12px;padding:11px;background:#eef5ff;border:2px solid #d6e6f4;border-radius:12px;margin:8px 0}.sortcard .symbol{font-size:29px}.sortcard .controls{margin-left:auto;display:flex;gap:4px}.sortcard button{padding:7px 11px;background:white;border:1px solid #cbdceb}.feedback{font-weight:800;margin:12px 0;min-height:26px}.good{color:#15754a}.bad{color:#aa2638}footer{text-align:center;padding:30px;color:#526e80;font-size:13px}a{color:#145d93}@media(max-width:700px){.grid{grid-template-columns:1fr}.panel{padding:15px}.tick{flex-basis:105px}}
+</style></head><body><header><h1>🇱🇻 Latvijas vēstures ekspedīcija</h1><p>6. klase • Mācies, pēti karti un pārbaudi zināšanas!</p><p style="font-size:13px;opacity:.9">Versija 4 • 20 jautājumu fināls • simboli • PD uzdevumi • vēsturiskās kartes</p></header><main><nav id="nav"><button data-tab="learn" class="active">📖 Mācies</button><button data-tab="map">🗺️ Laika karte</button><button data-tab="timeline">⏳ Laika līnija</button><button data-tab="masterGame">🎯 Tests 20 + spēles</button><button data-tab="order">🧩 Sakārto!</button><button data-tab="school">🇱🇻 Simboli & PD</button></nav>
+<section id="learn" class="active"><div class="panel"><h2>Ceļojums laikā</h2><p class="lead">Izvēlies notikumu un izpēti, kā Latvija kļuva par valsti, zaudēja neatkarību un to atguva.</p><div class="grid"><div><div id="learnScene" class="scene"></div><p class="small">Ilustratīvs simbols — nevis vēsturiska fotogrāfija.</p></div><div><div id="learnDate" class="year"></div><h2 id="learnTitle"></h2><p id="learnText"></p><button class="primary" id="nextLearn">Nākamais notikums →</button></div></div></div><div class="panel"><h3>Atceries jēdzienus</h3><p><b>Okupācija</b> — citas valsts teritorijas sagrābšana ar bruņotu spēku un savas pārvaldības ieviešana.</p><p><b>Deportācija</b> — cilvēku piespiedu izsūtīšana vai pārvietošana pēc varas iestāžu lēmuma.</p><p><b>Cenzūra</b> — informācijas un izteikšanās kontrole.</p><p><b>VDK (Čeka)</b> — padomju drošības iestāde, kas uzraudzīja un represēja cilvēkus.</p><p><b>Satversme</b> — Latvijas Republikas pamatlikums. Okupācijas laikā tās darbību pārtrauca, bet Latvijas valsts tiesiskā nepārtrauktība saglabājās.</p></div></section>
+<section id="map"><div class="panel"><h2>🗺️ Interaktīvā vēstures karte</h2><p>Pārvieto laika slīdni. Redzēsi, kas attiecīgajā posmā kontrolēja Latviju un kādi notikumi ietekmēja iedzīvotājus.</p><label for="mapRange"><b>Laiks: <span id="mapYear">1918</span></b></label><input type="range" id="mapRange" min="0" max="10" value="1" step="1"><div class="grid"><div class="mapbox"><svg viewBox="0 0 520 390" role="img" aria-label="Shematiska Baltijas reģiona karte ar Latviju, Rīgu un izsūtīšanas virzienu uz austrumiem"><rect width="520" height="390" fill="#d8eaf5"/><path d="M0 0H176L159 72 111 124 130 193 73 254 48 390H0Z" fill="#b4d4e9"/><text x="22" y="180" fill="#406b8b" font-size="17">Baltijas jūra</text><path d="M180 30L298 20 346 86 331 143 267 155 215 123 169 93Z" fill="#b9d3b1" stroke="white" stroke-width="3"/><text x="231" y="88" fill="#365b44" font-size="18">Igaunija</text><path id="latviaShape" d="M130 171L190 141 266 153 333 144 377 179 352 231 306 260 231 247 183 268 134 238 101 206Z" fill="#b12b43" stroke="white" stroke-width="4"/><text x="203" y="210" fill="white" font-weight="bold" font-size="23">LATVIJA</text><circle cx="207" cy="189" r="6" fill="white"/><text x="215" y="184" fill="white" font-size="15">Rīga</text><path d="M118 270L185 283 230 267 302 277 354 249 410 278 398 359 251 377 125 352Z" fill="#c6d6b3" stroke="white" stroke-width="3"/><text x="225" y="327" fill="#496347" font-size="19">Lietuva</text><path d="M391 0H520V390H425L405 284 373 233 400 178 351 118 365 70Z" fill="#dfd7bd"/><text x="439" y="126" fill="#746647" font-size="16">Austrumi</text><path id="deportArrow" d="M326 202 Q420 170 493 198" fill="none" stroke="#802244" stroke-width="7" stroke-dasharray="12 8" marker-end="url(#arrow)" style="display:none"/><defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0 0L0 6L9 3Z" fill="#802244"/></marker></defs><text x="15" y="375" fill="#38546b" font-size="12">Mācību shēma • nav precīza politisko robežu karte</text></svg></div><div><span id="mapTag" class="pill"></span><h2 id="mapTitle"></h2><p id="mapDesc"></p><div id="mapStatus" class="status"></div><p class="small" id="mapHint"></p></div></div></div>
+<div class="panel"><h2>🧭 Īstas vēsturiskās kartes</h2>
+<p>Salīdzini mācību shēmu ar vēsturiskiem avotiem. Nospied uz attēla, lai atvērtu to lielāku.</p>
+<div class="grid">
+<figure style="margin:0"><a href="https://commons.wikimedia.org/wiki/File:Latvia_1920.jpg" target="_blank" rel="noopener"><img loading="lazy" alt="Latvijas 1920. gada vēsturiskā karte" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Latvia%201920.jpg?width=900" style="width:100%;border-radius:14px"></a><figcaption><b>Latvija, 1920</b> — vēsturiska karte. Publiskais īpašums, Wikimedia Commons.</figcaption></figure>
+<figure style="margin:0"><a href="https://commons.wikimedia.org/wiki/File:SovietBlockade1940.jpg" target="_blank" rel="noopener"><img loading="lazy" alt="PSRS militārās blokādes un iebrukuma shēma 1940. gadā" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/SovietBlockade1940.jpg?width=900" style="width:100%;border-radius:14px"></a><figcaption><b>1940</b> — PSRS militārās blokādes un iebrukuma shēma Igaunijā un Latvijā. Publiskais īpašums, Wikimedia Commons.</figcaption></figure>
+</div>
+<div class="status" style="margin-top:14px"><b>Kartes detektīvs:</b> atrodi Latviju, Rīgu un kaimiņvalstis. Tad paskaidro: ko karte palīdz saprast labāk nekā tikai datums?</div></div>
+</section>
+<section id="timeline"><div class="panel"><h2>⏳ Interaktīvā laika līnija</h2><p>Nospied uz gada, lai apskatītu notikumu. Līniju var ritināt pa labi.</p><div id="ticks" class="timeline"></div><div class="grid"><div id="timelineIcon" class="scene"></div><div><div id="timelineDate" class="year"></div><h2 id="timelineTitle"></h2><p id="timelineDesc"></p><button class="primary" id="timelineNext">Nākamais →</button></div></div></div></section>
+<section id="quiz"><div class="panel"><h2>🎯 Pārbaudi zināšanas</h2><p id="quizCount" class="pill"></p><h3 id="question"></h3><div id="answers"></div><div id="quizFeedback" class="feedback" aria-live="polite"></div><button class="primary" id="quizNext" style="display:none">Nākamais jautājums →</button></div></section>
+<section id="order"><div class="panel"><h2>🧩 Saliec notikumus pareizā secībā</h2><p>Izmanto pogas ↑ un ↓, lai pārvietotu kartītes. Sāc ar senāko notikumu.</p><div id="sortList"></div><button class="primary" id="checkOrder">Pārbaudīt secību</button><button id="shuffleOrder">Sajaukt vēlreiz</button><div id="orderFeedback" class="feedback" aria-live="polite"></div></div></section>
+<div class="panel small"><b>Par avotiem:</b> mācību saturs balstīts uz skolai paredzēto tekstu “Kā Latvija zaudēja savu neatkarību?” un Soma.lv tēmu “Kā neatkarības zaudēšana ietekmēja Latvijas iedzīvotājus”. Soma.lv pilnais saturs var prasīt autorizāciju; šeit nav kopēti tā attēli. Kartē izmantota vienkāršota shēma, nevis precīzas vēsturiskās robežas. <br><a href="https://app.soma.lv/v2/viedtema/socialas-zinibas-un-vesture/sesta-klase/ka-veidojas-latvijas-valsts/ka-neatkaribas-zaudesana-ietekmeja-latvijas-iedzivotajus" target="_blank" rel="noopener">Soma.lv tēma ↗</a></div></main><footer>Latvijas vēsture • Mācies savā tempā 🌟</footer>
+<script>const events=[{"id": "1850", "date": "19. gs. vidus", "title": "Jaunlatvieši", "desc": "Latviešu valodas, kultūras un nacionālās pašapziņas stiprināšana. Viens no kustības pārstāvjiem — Krišjānis Valdemārs.", "icon": "📚", "state": "culture"}, {"id": "1918", "date": "18.11.1918", "title": "Latvijas Republika", "desc": "Tiek proklamēta neatkarīga Latvijas Republika.", "icon": "🇱🇻", "state": "free"}, {"id": "1922", "date": "1922", "title": "Satversme un Jānis Čakste", "desc": "Satversmi pieņēma 15. februārī, tā stājās spēkā 7. novembrī. Jāni Čaksti 14. novembrī ievēlēja par pirmo Valsts prezidentu.", "icon": "📜", "state": "free"}, {"id": "1939", "date": "23.08.1939", "title": "Molotova–Ribentropa pakts", "desc": "Vācija un PSRS paraksta neuzbrukšanas līgumu. Slepenais protokols Latviju iekļauj PSRS interešu sfērā.", "icon": "🤝", "state": "threat"}, {"id": "1940", "date": "17.06.1940", "title": "Pirmā PSRS okupācija", "desc": "PSRS karaspēks okupē Latviju. Neatkarīgā valsts zaudē iespēju pati lemt par savu nākotni.", "icon": "🚩", "state": "soviet"}, {"id": "1941a", "date": "14.06.1941", "title": "Pirmā lielā deportācija", "desc": "Padomju vara piespiedu kārtā izved tūkstošiem Latvijas iedzīvotāju uz attāliem PSRS apgabaliem.", "icon": "🚂", "state": "deport"}, {"id": "1941b", "date": "1941. gada vasara", "title": "Vācijas okupācija", "desc": "Vācijas karaspēks ieņem Latviju. Nacistiskā okupācija atnes teroru, vajāšanas un holokaustu.", "icon": "⚫", "state": "german"}, {"id": "1945", "date": "1944–1945", "title": "Otrā PSRS okupācija", "desc": "Padomju vara atgriežas; pēc kara Latvija atkal atrodas PSRS kontrolē.", "icon": "🚩", "state": "soviet"}, {"id": "1949", "date": "25.03.1949", "title": "Otrā lielā deportācija", "desc": "No Latvijas atkal piespiedu kārtā izved daudzus iedzīvotājus, tostarp ģimenes.", "icon": "🚂", "state": "deport"}, {"id": "1970", "date": "Padomju okupācijas gados", "title": "Ikdiena un kontrole", "desc": "Cenzūra, VDK uzraudzība, ierobežota brīvība, plānveida saimniecība, preču deficīts un migrācija no citiem PSRS reģioniem.", "icon": "🏭", "state": "soviet"}, {"id": "1991", "date": "21.08.1991", "title": "Neatkarības atjaunošana", "desc": "Latvijas Republika atjauno faktisko neatkarību. Daudzas valstis nebija atzinušas Latvijas okupāciju par likumīgu.", "icon": "🇱🇻", "state": "free"}];
+const $=x=>document.getElementById(x);let learnIndex=0, timelineIndex=0;
+document.querySelectorAll('nav button').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('nav button').forEach(x=>x.classList.toggle('active',x===b));document.querySelectorAll('section').forEach(x=>x.classList.toggle('active',x.id===b.dataset.tab));window.scrollTo({top:0,behavior:'smooth'})}));
+function renderLearn(){let e=events[learnIndex];$('learnScene').textContent=e.icon;$('learnDate').textContent=e.date;$('learnTitle').textContent=e.title;$('learnText').textContent=e.desc;$('nextLearn').textContent=learnIndex===events.length-1?'Sākt no jauna ↻':'Nākamais notikums →'}$('nextLearn').onclick=()=>{learnIndex=(learnIndex+1)%events.length;renderLearn()};renderLearn();
+function renderTimeline(){let e=events[timelineIndex];$('timelineIcon').textContent=e.icon;$('timelineDate').textContent=e.date;$('timelineTitle').textContent=e.title;$('timelineDesc').textContent=e.desc;$('ticks').innerHTML='';events.forEach((ev,i)=>{let b=document.createElement('button');b.className='tick'+(i===timelineIndex?' selected':'');b.innerHTML='<span>'+ev.icon+'</span>'+ev.date;b.onclick=()=>{timelineIndex=i;renderTimeline()};$('ticks').append(b)});$('ticks').children[timelineIndex].scrollIntoView({block:'nearest',inline:'nearest'})}$('timelineNext').onclick=()=>{timelineIndex=(timelineIndex+1)%events.length;renderTimeline()};renderTimeline();
+function renderMap(){let e=events[+$('mapRange').value],isDep=e.state==='deport';$('mapYear').textContent=e.date;$('mapTitle').textContent=e.title;$('mapDesc').textContent=e.desc;$('mapTag').textContent=({'free':'Neatkarīga Latvija','culture':'Nacionālā atmoda','threat':'Pieaug draudi','soviet':'PSRS kontrole','deport':'Piespiedu izsūtīšana','german':'Nacistiskās Vācijas kontrole'})[e.state];$('latviaShape').setAttribute('fill',({'free':'#a5263b','culture':'#a5263b','threat':'#d9a436','soviet':'#b36b65','deport':'#b36b65','german':'#505b64'})[e.state]);$('deportArrow').style.display=isDep?'':'none';$('mapStatus').textContent=isDep?'Bulta rāda tikai vispārīgu izsūtīšanas virzienu uz austrumiem. Reālie maršruti un galamērķi bija dažādi.':e.state==='free'?'Latvija ir neatkarīga valsts.':e.state==='german'?'Latviju pārvalda nacistiskās Vācijas okupācijas vara.':e.state==='soviet'?'Latvija atrodas PSRS okupācijas varas kontrolē.':'Pārmaiņas, kas ietekmē Latvijas nākotni.';$('mapHint').textContent='Izvēlētais notikums: '+e.date+' • '+(+$('mapRange').value+1)+' / '+events.length}$('mapRange').addEventListener('input',renderMap);renderMap();
+const questions=[['Kad proklamēja Latvijas Republiku?',['18.11.1918','15.02.1922','17.06.1940'],0,'1918. gada 18. novembrī Latvija tika proklamēta par neatkarīgu valsti.'],['Kas bija jaunlatvieši?',['Padomju drošības iestāde','Latviešu nacionālās atmodas kustība','Militāra vienība'],1,'Jaunlatvieši stiprināja latviešu valodu, kultūru un pašapziņu.'],['Kas bija pirmais Latvijas Valsts prezidents?',['Jānis Čakste','Kārlis Zariņš','Krišjānis Valdemārs'],0,'Jāni Čaksti ievēlēja 1922. gada 14. novembrī.'],['Kad Satversme stājās spēkā?',['1918. gada 18. novembrī','1922. gada 7. novembrī','1940. gada 17. jūnijā'],1,'Satversme pieņemta 15.02.1922 un stājās spēkā 07.11.1922.'],['Kas bija Molotova–Ribentropa pakta slepenā protokola sekas Latvijai?',['Latvija iestājās ES','Latvija nonāca PSRS interešu sfērā','Latvija kļuva par Vācijas sabiedroto'],1,'Slepenajā protokolā Latvija tika iekļauta PSRS interešu sfērā.'],['Kad PSRS pirmoreiz okupēja Latviju?',['17.06.1940','14.06.1941','25.03.1949'],0,'Padomju okupācija sākās 1940. gada 17. jūnijā.'],['Kas ir deportācija?',['Brīvprātīga pārcelšanās','Piespiedu izsūtīšana','Vēlēšanu organizēšana'],1,'Deportācija nozīmē piespiedu izsūtīšanu vai pārvietošanu.'],['Kuri ir divu lielo deportāciju datumi?',['14.06.1941 un 25.03.1949','18.11.1918 un 07.11.1922','23.08.1939 un 21.08.1991'],0,'Lielās deportācijas notika 1941. gada 14. jūnijā un 1949. gada 25. martā.'],['Kas kontrolēja presi un ierobežoja vārda brīvību PSRS okupācijas laikā?',['Cenzūra un padomju vara','Jaunlatvieši','Satversmes sapulce'],0,'Padomju okupācijas laikā tika izmantota cenzūra un propaganda.'],['Ko apzīmē VDK?',['Latvijas pirmo parlamentu','Padomju valsts drošības iestādi','Latviešu kultūras biedrību'],1,'VDK jeb Čeka uzraudzīja cilvēkus un īstenoja represijas.'],['Vai Latvija okupācijas laikā pilnībā pārstāja pastāvēt starptautiskajās tiesībās?',['Jā','Nē'],1,'Daudzas valstis neatzina okupāciju; Latvijas diplomāti turpināja pārstāvēt valsti.'],['Kad Latvija atjaunoja faktisko neatkarību?',['21.08.1991','25.03.1949','23.08.1939'],0,'1991. gada 21. augustā tika atjaunota Latvijas faktiskā neatkarība.']];let qi=0,score=0,answered=false;
+function showQ(){if(qi>=questions.length){$('quizCount').textContent='Pabeigts!';$('question').textContent='🏆 Rezultāts: '+score+' / '+questions.length;$('answers').innerHTML='<p>Tu vari atkārtot testu un uzlabot rezultātu!</p><button class="primary" id="restartQuiz">Spēlēt vēlreiz ↻</button>';$('restartQuiz').onclick=()=>{qi=0;score=0;showQ()};$('quizNext').style.display='none';$('quizFeedback').textContent='';return}answered=false;let q=questions[qi];$('quizCount').textContent='Jautājums '+(qi+1)+' / '+questions.length+' • ⭐ '+score;$('question').textContent=q[0];$('quizFeedback').textContent='';$('quizNext').style.display='none';$('answers').innerHTML='';q[1].forEach((answer,i)=>{let b=document.createElement('button');b.className='choice';b.textContent=answer;b.onclick=()=>{if(answered)return;answered=true;let ok=i===q[2];if(ok)score++;[...$('answers').children].forEach((x,j)=>{x.disabled=true;if(j===q[2])x.classList.add('correct');else if(j===i)x.classList.add('wrong')});$('quizFeedback').className='feedback '+(ok?'good':'bad');$('quizFeedback').textContent=(ok?'Pareizi! 🌟 ':'Pamēģini atcerēties! ')+q[3];$('quizNext').style.display='inline-block'};$('answers').append(b)})}$('quizNext').onclick=()=>{qi++;showQ()};showQ();
+const orderIds=['1918','1922','1939','1940','1941a','1941b','1945','1949','1991'];let currentOrder=[];function shuffle(){currentOrder=[...orderIds].sort(()=>Math.random()-.5);renderOrder();$('orderFeedback').textContent=''}function renderOrder(){let root=$('sortList');root.innerHTML='';currentOrder.forEach((id,i)=>{let e=events.find(x=>x.id===id),div=document.createElement('div');div.className='sortcard';div.innerHTML='<span class="symbol">'+e.icon+'</span><span><b>'+e.title+'</b><br><small>'+e.date+'</small></span>';let c=document.createElement('span');c.className='controls';[['↑',-1],['↓',1]].forEach(([t,d])=>{let b=document.createElement('button');b.textContent=t;b.setAttribute('aria-label','Pārvietot '+(d<0?'augšup':'lejup'));b.disabled=i+d<0||i+d>=currentOrder.length;b.onclick=()=>{[currentOrder[i],currentOrder[i+d]]=[currentOrder[i+d],currentOrder[i]];renderOrder()};c.append(b)});div.append(c);root.append(div)})}$('checkOrder').onclick=()=>{let count=currentOrder.filter((id,i)=>id===orderIds[i]).length;let f=$('orderFeedback');f.className='feedback '+(count===orderIds.length?'good':'bad');f.textContent=count===orderIds.length?'🏆 Lieliski! Visi notikumi ir pareizā secībā!':'Pareizās vietās: '+count+' / '+orderIds.length+'. Pārvieto kartītes un mēģini vēlreiz!'};$('shuffleOrder').onclick=shuffle;shuffle();
+</script><section style="max-width:1100px;margin:30px auto;padding:20px"><h2>🇱🇻 Atmoda un neatkarības atjaunošana</h2>
+<div id="atmodaCards"></div><h3>🧠 Atmodas tests</h3><div id="aq"></div><button onclick="checkAQ()">Pārbaudīt</button><b id="ar"></b>
+<h3>⏳ Saliec notikumus secībā</h3><div id="ao"></div><button onclick="checkAO()">Pārbaudīt secību</button><b id="aor"></b>
+<h3>🏛️ Valsts un demokrātija — PD treniņš</h3>
+<div class="card"><b>Atceries:</b> Republika • Tauta • Demokrātija • Satversme • likumdevēja vara (Saeima) • izpildvara (Ministru kabinets) • tiesu vara (tiesas). Valsts pamatzīmes: teritorija, iedzīvotāji, valsts vara. Latvijas simboli: karogs, ģerbonis, himna.</div></section>
+<script>
+const AC=[
+["1988","Latvijas Tautas fronte","8. oktobrī nodibināja LTF. Tā apvienoja daudzus iedzīvotājus un centās panākt neatkarības atjaunošanu miermīlīgā, konstitucionālā ceļā."],
+["23.08.1989","Baltijas ceļš","Apmēram 2 miljoni cilvēku Igaunijā, Latvijā un Lietuvā izveidoja ap 600 km garu dzīvo ķēdi un pievērsa pasaules uzmanību Baltijas brīvības centieniem."],
+["04.05.1990","Neatkarības deklarācija","Augstākā Padome pieņēma deklarāciju “Par Latvijas Republikas neatkarības atjaunošanu”. Sākās pāreja uz pilnīgu neatkarību."],
+["1991. gada janvāris","Barikādes","Cilvēki sargāja svarīgus valsts, radio un televīzijas objektus, aizstāvot neatkarības procesu."],
+["21.08.1991","Valstiskais statuss","Pieņēma konstitucionālo likumu “Par Latvijas Republikas valstisko statusu”; neatkarības atjaunošana tika pabeigta."],
+["06.09.1991","Starptautiskā atzīšana","PSRS atzina Latvijas valstisko neatkarību."]
+];
+document.getElementById("atmodaCards").innerHTML=AC.map(x=>`<div class="card" style="margin:9px 0"><b>${x[0]} — ${x[1]}</b><p>${x[2]}</p></div>`).join("");
+const Q=[
+["Kad notika Baltijas ceļš?",["23.08.1989","04.05.1990","21.08.1991"],0],
+["Kad pieņēma Neatkarības deklarāciju?",["18.11.1918","04.05.1990","06.09.1991"],1],
+["Kas bija LTF?",["Latvijas Tautas fronte","Latvijas Tiesu federācija","Latvijas teritoriālais fonds"],0],
+["Kāpēc cēla barikādes?",["Lai aizstāvētu neatkarības procesu","Lai svinētu valsts svētkus","Lai slēgtu skolas"],0],
+["Kad pabeidza neatkarības atjaunošanu?",["21.08.1991","23.08.1989","17.06.1940"],0],
+["Kas veicināja pārmaiņas 80. gadu beigās?",["Perestroika, Aukstā kara beigu process un sabiedrības aktivitāte","PSRS nostiprināšanās","Kosmosa sacensība"],0],
+["Kā pārbaudīt aculiecinieka atmiņas?",["Salīdzināt ar citiem avotiem","Tikai ticēt vienam stāstam","Minēt"],0],
+["Kas Latvijā pieņem likumus?",["Saeima","Tiesa","Policija"],0]
+];
+document.getElementById("aq").innerHTML=Q.map((q,i)=>`<div class="card" style="margin:8px 0"><b>${i+1}. ${q[0]}</b>${q[1].map((a,j)=>`<label style="display:block"><input type="radio" name="a${i}" value="${j}"> ${a}</label>`).join("")}</div>`).join("");
+function checkAQ(){let s=0;Q.forEach((q,i)=>{let z=document.querySelector(`input[name=a${i}]:checked`);if(z&&+z.value===q[2])s++});document.getElementById("ar").textContent=` Rezultāts ${s}/${Q.length}`;}
+let O=[...AC].sort(()=>Math.random()-.5);
+function drawO(){document.getElementById("ao").innerHTML=O.map((x,i)=>`<div class="card" style="margin:6px 0"><button onclick="mv(${i},-1)">↑</button><button onclick="mv(${i},1)">↓</button> <b>${x[0]}</b> — ${x[1]}</div>`).join("")}
+function mv(i,d){let n=i+d;if(n<0||n>=O.length)return;[O[i],O[n]]=[O[n],O[i]];drawO()}
+function checkAO(){let ok=O.every((x,i)=>x[0]===AC[i][0]);document.getElementById("aor").textContent=ok?" ✅ Pareizi!":" ❌ Pamēģini vēlreiz."} drawO();
+</script>
+<style>
+.game-zone{max-width:1100px;margin:28px auto;padding:20px}.memory-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:10px}
+.mem{min-height:105px;border:2px solid #ddd;border-radius:14px;padding:12px;background:#fff;cursor:pointer;font-weight:700}.mem.on{background:#fff3bf;border-color:#f0b429}.mem.done{background:#d3f9d8;border-color:#2f9e44}
+.mapgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}.mapbox{border-radius:16px;padding:14px;background:#f5f5f5}.mapart{height:170px;border-radius:12px;background:linear-gradient(135deg,#dbeafe,#dcfce7);position:relative;overflow:hidden}.latshape{position:absolute;inset:28px 34px;background:#8fbf8f;clip-path:polygon(5% 38%,20% 20%,45% 25%,62% 10%,93% 30%,85% 55%,65% 61%,50% 84%,22% 75%,8% 58%)}.mapdot{position:absolute;width:12px;height:12px;border-radius:50%;background:#8b1e3f;z-index:2}.maplabel{position:absolute;font-size:12px;font-weight:700;z-index:3}
+.fill{width:145px;max-width:45vw;border:0;border-bottom:2px solid #333;font:inherit;padding:3px}.qcard{padding:14px;margin:10px 0;border-radius:14px;background:#fff;border:1px solid #ddd}.badge{display:inline-block;padding:4px 9px;border-radius:20px;background:#eee;font-size:12px}.hearts{font-size:22px}.xp{font-weight:800}
+</style>
+<section class="game-zone" id="masterGame">
+<h2>🏆 Vēstures misija: kļūsti par Latvijas vēstures ekspertu!</h2>
+<p>4 līmeņi • atmiņas spēle • kartes • 20 jautājumu fināls. Par katru pareizo atbildi saņem ⭐ XP.</p>
+<div><span class="badge">XP: <span id="xp">0</span></span> <span class="badge">Līmenis: <span id="lvl">1</span>/4</span></div>
+
+<h3>🧠 1. līmenis — Atmiņas pāri</h3>
+<p>Atrodi jēdzienam pareizo skaidrojumu. Atver divas kartītes.</p>
+<div class="memory-grid" id="memory"></div><p id="memmsg"></p>
+
+<h3>🗺️ 2. līmenis — Vēsturiskās kartes</h3>
+<p>Kartes šeit ir mācību shēmas: galvenais ir saprast <b>periodu, telpu un notikumu</b>. Papildus izmantotas publiski pieejamas vēsturisko karšu ziņas no Wikimedia Commons.</p>
+<div class="mapgrid">
+<div class="mapbox"><div class="mapart"><div class="latshape"></div><span class="mapdot" style="left:52%;top:54%"></span><span class="maplabel" style="left:56%;top:51%">Rīga</span></div><b>Latvijas Republika, 1920.–1930. gadi</b><p>Neatkarīga valsts ar savu teritoriju, Satversmi un valsts institūcijām. 1920. gada Latvijas karte palīdz salīdzināt valsts telpu pirms okupācijas.</p></div>
+<div class="mapbox"><div class="mapart" style="background:linear-gradient(135deg,#fee2e2,#e5e7eb)"><div class="latshape" style="background:#c77"></div><span class="maplabel" style="left:24%;top:15%">PSRS →</span><span class="maplabel" style="right:8%;bottom:12%">1940</span></div><b>1940 — PSRS okupācija</b><p>17. jūnijā PSRS karaspēks okupēja Latviju. Vēsturiskajās militārajās shēmās redzama arī padomju blokādes un iebrukuma ģeogrāfija Baltijā.</p></div>
+<div class="mapbox"><div class="mapart" style="background:linear-gradient(135deg,#dbeafe,#fef3c7)"><div class="latshape"></div><span class="maplabel" style="left:15%;top:20%">Tallina</span><span class="maplabel" style="left:46%;top:48%">Rīga</span><span class="maplabel" style="left:65%;bottom:12%">Viļņa</span><div style="position:absolute;left:25%;top:35%;width:55%;height:5px;background:#8b1e3f;transform:rotate(28deg)"></div></div><b>23.08.1989 — Baltijas ceļš</b><p>Apmēram 2 miljoni cilvēku izveidoja cilvēku ķēdi cauri Igaunijai, Latvijai un Lietuvai. Tā savienoja Baltijas galvaspilsētas un demonstrēja prasību pēc brīvības.</p></div>
+</div>
+
+<h3>✍️ 3. līmenis — Ievieto trūkstošos vārdus</h3>
+<p>Tieši tāds princips kā darba lapā: ne tikai izvēlies, bet <b>atceries un ieraksti</b>.</p>
+<div id="fillgame"></div><button onclick="checkFill()">Pārbaudīt vārdus</button><p id="fillres"></p>
+
+<h3>🎯 4. līmenis — FINĀLA TESTS: 20 jautājumi</h3>
+<p>Ir izvēles jautājumi, īsās atbildes, terminoloģija un kartes jautājumi.</p>
+<div id="final20"></div><button onclick="checkFinal20()">🏁 Pabeigt misiju</button><div id="finalres" style="font-size:20px;font-weight:800;margin:14px 0"></div>
+</section>
+<script>
+let XP=0;function addxp(n){XP+=n;document.getElementById("xp").textContent=XP;document.getElementById("lvl").textContent=Math.min(4,1+Math.floor(XP/40))}
+const pairs=[["Okupācija","citas valsts teritorijas sagrābšana un savas pārvaldes ieviešana"],["Deportācija","cilvēku piespiedu izsūtīšana pēc valsts lēmuma"],["Satversme","Latvijas Republikas konstitūcija"],["Demokrātija","vara pieder tautai un tās ievēlētiem pārstāvjiem"],["LTF","Latvijas Tautas fronte"],["Atmoda","kustība un pārmaiņu laiks ceļā uz neatkarības atjaunošanu"]];
+let mc=[];pairs.forEach((p,i)=>{mc.push({t:p[0],p:i});mc.push({t:p[1],p:i})});mc.sort(()=>Math.random()-.5);let sel=[],done=new Set();
+document.getElementById("memory").innerHTML=mc.map((x,i)=>`<button class="mem" id="m${i}" onclick="flipM(${i})">❓</button>`).join("");
+function flipM(i){if(done.has(mc[i].p)||sel.includes(i)||sel.length===2)return;document.getElementById("m"+i).textContent=mc[i].t;document.getElementById("m"+i).classList.add("on");sel.push(i);if(sel.length===2)setTimeout(()=>{let[a,b]=sel;if(mc[a].p===mc[b].p){done.add(mc[a].p);[a,b].forEach(k=>document.getElementById("m"+k).className="mem done");addxp(10);document.getElementById("memmsg").textContent="⭐ Pareizi!";}else{[a,b].forEach(k=>{document.getElementById("m"+k).textContent="❓";document.getElementById("m"+k).className="mem"})}sel=[]},650)}
+const fills=[
+["1918. gada ___ novembrī tika proklamēta Latvijas Republika.","18"],
+["Latvijas Republikas konstitūciju sauc par ___.","Satversmi"],
+["1939. gada 23. augustā tika noslēgts Molotova–___ pakts.","Ribentropa"],
+["PSRS okupēja Latviju 1940. gada ___ jūnijā.","17"],
+["Masveida deportācijas notika 1941. gada 14. jūnijā un 1949. gada 25. ___.","martā"],
+["1988. gadā tika nodibināta Latvijas Tautas ___.","fronte"],
+["1989. gada 23. augustā notika akcija “Baltijas ___”.","ceļš"],
+["1990. gada 4. maijā pieņēma Neatkarības ___.","deklarāciju"],
+["1991. gada janvārī cilvēki Rīgā cēla ___.","barikādes"],
+["Latvijas neatkarības atjaunošana tika pabeigta 1991. gada ___ augustā.","21"]
+];
+document.getElementById("fillgame").innerHTML=fills.map((x,i)=>`<div class="qcard">${i+1}. ${x[0].replace("___",`<input class="fill" id="f${i}">`)}</div>`).join("");
+function norm(s){return (s||"").trim().toLowerCase().normalize("NFD").replace(/[\\u0300-\\u036f]/g,"")}
+function checkFill(){let s=0;fills.forEach((x,i)=>{let e=document.getElementById("f"+i);let ok=norm(e.value)===norm(x[1]);e.style.background=ok?"#d3f9d8":"#ffe3e3";if(ok)s++});addxp(s*2);document.getElementById("fillres").textContent=`${s}/10 pareizi. ${s>=8?"⭐ Lieliski!":"Apskati kļūdas un mēģini vēlreiz."}`}
+
+const F=[
+{q:"Ko nozīmē jēdziens “okupācija”?",a:["Brīvprātīga valstu savienība","Svešas valsts teritorijas sagrābšana ar spēku un savas pārvaldes ieviešana","Vēlēšanas"],c:1},
+{q:"Kad proklamēja Latvijas Republiku?",a:["18.11.1918","04.05.1990","21.08.1991"],c:0},
+{q:"Kas bija pirmais Latvijas Valsts prezidents?",a:["Jānis Čakste","Krišjānis Valdemārs","Mihails Gorbačovs"],c:0},
+{q:"Kas ir Satversme?",a:["Latvijas konstitūcija","Latvijas himna","politiskā partija"],c:0},
+{q:"Kura vara Latvijā pieņem likumus?",a:["Tiesu vara","Likumdevēja vara — Saeima","Izpildvara"],c:1},
+{q:"Ko paredzēja Molotova–Ribentropa pakta slepenais protokols Latvijai?",a:["Latvija nonāca PSRS interešu sfērā","Latvija iestājās ES","Latvija kļuva par Vācijas daļu 1939. gadā"],c:0},
+{q:"Kad sākās pirmā PSRS okupācija Latvijā?",a:["17.06.1940","14.06.1941","23.08.1939"],c:0},
+{q:"Kas ir deportācija?",a:["Brīvprātīga pārcelšanās","Valsts organizēta piespiedu izsūtīšana","Ceļojums"],c:1},
+{q:"Kuri ir divi mācību materiālā uzsvērtie masu deportāciju datumi?",a:["14.06.1941 un 25.03.1949","18.11.1918 un 04.05.1990","23.08.1939 un 23.08.1989"],c:0},
+{q:"Kura okupācijas vara pārņēma Latviju 1941. gada vasarā?",a:["Vācija","Zviedrija","ASV"],c:0},
+{q:"Ko padomju režīmā nozīmēja cenzūra?",a:["Brīva jebkura viedokļa publicēšana","Informācijas un izteiksmes kontrole","Jauna vēlēšanu sistēma"],c:1},
+{q:"Kas bija Latvijas Tautas fronte?",a:["Plaša sabiedriski politiska kustība","PSRS armijas daļa","Tiesa"],c:0},
+{q:"Kad notika Baltijas ceļš?",a:["23.08.1989","04.05.1990","13.01.1991"],c:0},
+{q:"Ko parādīja Baltijas ceļš?",a:["Baltijas tautu vienotību un prasību pēc brīvības","Atbalstu okupācijai","Jaunu robežu izveidi"],c:0},
+{q:"Kas notika 4.05.1990?",a:["Pieņēma deklarāciju par neatkarības atjaunošanu","Sākās PSRS okupācija","Proklamēja Latviju 1918. gadā"],c:0},
+{q:"Kāpēc 1991. gada janvārī cēla barikādes?",a:["Lai aizsargātu neatkarības procesu un svarīgus objektus","Sporta sacensībām","Lai mainītu valsts robežu"],c:0},
+{q:"Kas notika 21.08.1991?",a:["Pabeidza Latvijas neatkarības atjaunošanu","Notika Baltijas ceļš","Pieņēma Satversmi"],c:0},
+{q:"Kāpēc vēsturniekam jāsalīdzina vairāku aculiecinieku stāstījumi?",a:["Lai pārbaudītu faktus un atšķirtu viedokļus","Jo visi atceras pilnīgi vienādi","Lai izvēlētos garāko stāstu"],c:0},
+{q:"Kartē redzi cilvēku ķēdi Tallina–Rīga–Viļņa. Kurš notikums tas ir?",a:["Baltijas ceļš","Barikādes","Deportācija"],c:0},
+{q:"Kas vislabāk raksturo Atmodas loģiku?",a:["Pilsoniskā aktivitāte + miermīlīgs politisks spiediens + neatkarības ideja","Okupācijas nostiprināšana","Sabiedrības atteikšanās no politikas"],c:0}
+];
+document.getElementById("final20").innerHTML=F.map((q,i)=>`<div class="qcard"><b>${i+1}. ${q.q}</b>${q.a.map((a,j)=>`<label style="display:block;margin:6px"><input type="radio" name="z${i}" value="${j}"> ${a}</label>`).join("")}</div>`).join("");
+function checkFinal20(){let s=0;F.forEach((q,i)=>{let x=document.querySelector(`input[name=z${i}]:checked`);if(x&&+x.value===q.c)s++});addxp(s*2);let stars=s>=18?"⭐⭐⭐":s>=15?"⭐⭐":s>=12?"⭐":"🔁";document.getElementById("finalres").innerHTML=`${stars} ${s}/20 — ${s>=18?"Vēstures eksperts!":s>=15?"Ļoti labi!":s>=12?"Labs pamats — atkārto kļūdas.":"Atkārto terminus un laika līniju un mēģini vēlreiz."}`;}
+</script>
+
+<style>
+.school-zone{max-width:1100px;margin:30px auto;padding:20px}.school-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}.school-card{background:#fff;border:1px solid #ddd;border-radius:14px;padding:14px}.shortanswer{width:min(520px,95%);padding:9px;border:1px solid #aaa;border-radius:8px}.good{background:#d3f9d8!important}.bad{background:#ffe3e3!important}
+</style>
+<section class="school-zone" id="school">
+<h2>🏫 Skolas PD treniņš — visi uzdevumu veidi</h2>
+<p>Šis bloks apkopo arī iepriekšējos čata uzdevumus: valsts veidošanās, jēdzieni, simboli, Satversmes sapulce, varas dalīšana, politiķa īpašības, vēstures hronoloģija, Atmoda, mediji un neatkarības atjaunošana.</p>
+
+<h3>🇱🇻 Valsts simbolu misija</h3>
+<div class="school-grid">
+<div class="school-card"><div style="font-size:46px">🇱🇻</div><b>Latvijas valsts karogs</b><p>Tumši sarkans (karmīnsarkans) ar baltu horizontālu joslu.</p></div>
+<div class="school-card"><div style="font-size:42px">🛡️</div><b>Latvijas valsts ģerbonis</b><p>Valsts simbols, kurā apvienotas Latvijas valstiskuma un vēsturisko zemju zīmes.</p></div>
+<div class="school-card"><div style="font-size:42px">🎵</div><b>Valsts himna</b><p>“Dievs, svētī Latviju!” — Baumaņu Kārļa radīta Latvijas valsts himna.</p></div>
+</div>
+
+<h3>🔤 Jēdzienu banka — iegaumē pēc atslēgvārda</h3>
+<div class="school-grid">
+<div class="school-card"><b>Republika → “ievēlēta vara”</b><p>Valsts pārvaldes forma, kur valsts vadītājs nav mantojams monarhs.</p></div>
+<div class="school-card"><b>Tauta → “kopība”</b><p>Cilvēku kopība ar kopīgām kultūras, valodas, tradīciju un vēsturiskās pieredzes pazīmēm.</p></div>
+<div class="school-card"><b>Demokrātija → “tautas vara”</b><p>Vara pieder tautai un tiek īstenota tieši vai ar ievēlētu pārstāvju starpniecību.</p></div>
+<div class="school-card"><b>Satversme → “pamatlikums”</b><p>Latvijas Republikas konstitūcija.</p></div>
+<div class="school-card"><b>Likumdevēja → “likumi”</b><p>Saeima pieņem likumus.</p></div>
+<div class="school-card"><b>Izpildvara → “izpilda”</b><p>Ministru kabinets īsteno likumus un valsts politiku.</p></div>
+<div class="school-card"><b>Tiesu vara → “tiesā”</b><p>Tiesas izskata strīdus un likumpārkāpumus.</p></div>
+<div class="school-card"><b>Plašsaziņas līdzekļi → “informē”</b><p>Informē sabiedrību un palīdz veidot sabiedrisko domu; tos mēdz neformāli saukt par “ceturto varu”.</p></div>
+</div>
+
+<h3>✍️ Īsās atbildes — kā darba lapā</h3>
+<div id="schoolShort"></div>
+<button onclick="checkSchoolShort()">Pārbaudīt īsās atbildes</button><b id="ssres"></b>
+
+<h3>🔗 Savieno jēdzienu ar skaidrojumu</h3>
+<div id="schoolMatch"></div><button onclick="checkSchoolMatch()">Pārbaudīt savienojumus</button><b id="smres"></b>
+
+<h3>🕰️ Hronoloģijas izaicinājums — arī no iepriekšējās PD</h3>
+<p>Izvēlies pareizo notikumu katram gadam.</p>
+<div id="oldChron"></div><button onclick="checkOldChron()">Pārbaudīt hronoloģiju</button><b id="ocres"></b>
+
+<h3>📰 Avotu un mediju detektīvs</h3>
+<div id="mediaQuiz"></div><button onclick="checkMedia()">Pārbaudīt</button><b id="mediares"></b>
+</section>
+<script>
+const SS=[
+["Nosauc trīs Latvijas valsts simbolus.",["karogs","ģerbonis","himna"]],
+["Kā sauc Latvijas Republikas konstitūciju?",["satversme"]],
+["Kā sauc varu, kas pieņem likumus?",["likumdevēja","likumdeveja"]],
+["Kā sauc varu, kas izskata strīdus un likumpārkāpumus?",["tiesu"]],
+["Kāda institūcija Latvijā īsteno izpildvaru?",["ministru kabinets"]],
+["Nosauc trīs valsts pamatelementus/pamatpazīmes.",["teritorija","iedzīvotāji","vara"]],
+["Kad sākās Satversmes sapulces darbs? (datums vai gads)",["1920","1.05.1920","01.05.1920","1 maijs 1920"]],
+["Kāds bija Satversmes sapulces svarīgākais uzdevums?",["satversme","izstrādāt satversmi","izstradat satversmi"]],
+["Kā sauca plašo kustību, kas 1988. gadā apvienoja neatkarības atbalstītājus?",["latvijas tautas fronte","ltf"]],
+["Kā sauca 1989. gada 23. augusta cilvēku ķēdi?",["baltijas ceļš","baltijas cels"]]
+];
+document.getElementById("schoolShort").innerHTML=SS.map((x,i)=>`<div class="school-card" style="margin:8px 0"><b>${i+1}. ${x[0]}</b><br><input id="ss${i}" class="shortanswer"></div>`).join("");
+function nrm(s){return (s||"").toLowerCase().trim().normalize("NFD").replace(/[\u0300-\u036f]/g,"")}
+function checkSchoolShort(){let s=0;SS.forEach((x,i)=>{let e=document.getElementById("ss"+i),v=nrm(e.value);let ok=x[1].every? (x[1].length>1&&i===0?x[1].every(k=>v.includes(nrm(k))):x[1].some(k=>v.includes(nrm(k)))):false;e.className="shortanswer "+(ok?"good":"bad");if(ok)s++});document.getElementById("ssres").textContent=` ${s}/${SS.length}`}
+
+const SM=[["Republika","valsts pārvaldes forma ar nemantojamu valsts vadītāja amatu"],["Tauta","cilvēku kopība"],["Demokrātija","tautas vara"],["Satversme","Latvijas konstitūcija"],["Likumdevēja vara","pieņem likumus"],["Izpildvara","īsteno likumus un politiku"],["Tiesu vara","izskata strīdus un likumpārkāpumus"]];
+let defs=SM.map(x=>x[1]).sort(()=>Math.random()-.5);
+document.getElementById("schoolMatch").innerHTML=SM.map((x,i)=>`<div class="school-card" style="margin:7px 0"><b>${x[0]}</b> → <select id="sm${i}"><option value="">Izvēlies…</option>${defs.map(d=>`<option>${d}</option>`).join("")}</select></div>`).join("");
+function checkSchoolMatch(){let s=0;SM.forEach((x,i)=>{let e=document.getElementById("sm"+i);let ok=e.value===x[1];e.className=ok?"good":"bad";if(ok)s++});document.getElementById("smres").textContent=` ${s}/${SM.length}`}
+
+const OC=[["1202","tika nodibināts Zobenbrāļu ordenis"],["1582–1583","beidzās Livonijas karš"],["1721","Vidzeme tika pievienota Krievijai"],["1795","Kurzeme un Zemgale tika iekļauta Krievijas impērijā"],["1873","notika pirmie Vispārējie latviešu Dziesmu svētki"]];
+let oe=OC.map(x=>x[1]).sort(()=>Math.random()-.5);
+document.getElementById("oldChron").innerHTML=OC.map((x,i)=>`<div class="school-card" style="margin:7px 0"><b>${x[0]}</b> — <select id="oc${i}"><option value="">Izvēlies…</option>${oe.map(d=>`<option>${d}</option>`).join("")}</select></div>`).join("");
+function checkOldChron(){let s=0;OC.forEach((x,i)=>{let e=document.getElementById("oc"+i),ok=e.value===x[1];e.className=ok?"good":"bad";if(ok)s++});document.getElementById("ocres").textContent=` ${s}/${OC.length}`}
+
+const MQ=[
+["Kuri mediji bija reāli pieejami cilvēkiem 1991. gada barikāžu laikā?",["radio, TV, laikraksti un citi cilvēki","sociālie tīkli un viedtālruņi"],0],
+["Kāpēc medijiem bija svarīga loma Atmodas laikā?",["Tie palīdzēja izplatīt informāciju un mobilizēt sabiedrību","Tie aizstāja parlamentu"],0],
+["Kāpēc vēsturnieks salīdzina vairākus aculiecinieku stāstījumus?",["Lai pārbaudītu faktus un pamanītu atšķirīgus skatpunktus","Lai atrastu vienu garāko stāstu"],0],
+["Kas ir pilsoniskā aktivitāte?",["Iesaistīšanās sabiedrības un valsts dzīvē","Tikai piedalīšanās sportā"],0],
+["Kuras īpašības no iepriekšējās PD vislabāk iederas uzticamam politiķim?",["gudrība, taisnīgums, godīgums","neiecietība, spēks, vienaldzība"],0]
+];
+document.getElementById("mediaQuiz").innerHTML=MQ.map((q,i)=>`<div class="school-card" style="margin:7px 0"><b>${i+1}. ${q[0]}</b>${q[1].map((a,j)=>`<label style="display:block"><input type="radio" name="mq${i}" value="${j}"> ${a}</label>`).join("")}</div>`).join("");
+function checkMedia(){let s=0;MQ.forEach((q,i)=>{let e=document.querySelector(`input[name=mq${i}]:checked`);if(e&&+e.value===q[2])s++});document.getElementById("mediares").textContent=` ${s}/${MQ.length}`}
+</script>
+</body></html>
